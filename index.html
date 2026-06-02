@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUSE I · 카자흐스탄 인텔리전스 허브</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans KR',sans-serif;background:#f7f5f2;color:#1a1a1a;line-height:1.6;font-size:14px;}
+a{color:inherit;text-decoration:none;}
+strong{font-weight:600;}
+
+/* ─── TOPBAR ─── */
+.topbar{background:#fff;border-bottom:1px solid #e8e4de;padding:0 1.5rem;height:52px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;}
+.tb-logo{display:flex;align-items:center;gap:8px;}
+.tb-dots{display:flex;gap:4px;}
+.tb-dots span{width:7px;height:7px;border-radius:50%;display:block;}
+.tb-name{font-size:14px;font-weight:700;letter-spacing:0.02em;}
+.tb-right{display:flex;align-items:center;gap:8px;}
+.tb-badge{font-size:11px;background:#FBEAF0;color:#993556;padding:3px 10px;border-radius:100px;border:1px solid #F4C0D1;}
+.tb-kz{font-size:11px;color:#888;}
+
+/* ─── GNB ─── */
+.gnb{background:#fff;border-bottom:1px solid #e8e4de;padding:0 1.5rem;display:flex;gap:0;overflow-x:auto;position:sticky;top:52px;z-index:190;}
+.gnb::-webkit-scrollbar{height:3px;}
+.gnb::-webkit-scrollbar-thumb{background:#e0dbd5;border-radius:2px;}
+.gnb-item{padding:0 1rem;height:44px;display:flex;align-items:center;gap:5px;font-size:13px;color:#888;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:color .2s,border-color .2s;}
+.gnb-item:hover{color:#1a1a1a;}
+.gnb-item.active{color:#D4537E;border-bottom-color:#D4537E;font-weight:600;}
+.gnb-item .gi{font-size:15px;}
+
+/* ─── SECTIONS ─── */
+.section{display:none;animation:fadein .25s ease;}
+.section.active{display:block;}
+@keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+/* ─── HERO ─── */
+.hero{background:linear-gradient(135deg,#1a1228 0%,#2d1f3d 40%,#1a2840 100%);color:#fff;padding:3rem 1.5rem 2.5rem;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-60px;right:-60px;width:300px;height:300px;border-radius:50%;background:rgba(212,83,126,0.12);pointer-events:none;}
+.hero::after{content:'';position:absolute;bottom:-80px;left:-40px;width:250px;height:250px;border-radius:50%;background:rgba(127,119,221,0.1);pointer-events:none;}
+.hero-inner{max-width:900px;margin:0 auto;position:relative;z-index:1;}
+.hero-tag{display:flex;align-items:center;gap:8px;margin-bottom:1.25rem;}
+.hero-tag-text{font-size:11px;color:rgba(255,255,255,0.5);letter-spacing:0.1em;}
+.hero-title{font-size:32px;font-weight:800;line-height:1.2;margin-bottom:.5rem;}
+.hero-title span{color:#D4537E;}
+.hero-sub{font-size:15px;color:rgba(255,255,255,0.6);margin-bottom:2rem;}
+.hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:2rem;}
+.hstat{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:1rem 1.25rem;}
+.hstat-num{font-size:22px;font-weight:800;color:#D4537E;margin-bottom:2px;}
+.hstat-lbl{font-size:11px;color:rgba(255,255,255,0.5);}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:2rem;}
+.hpill{font-size:12px;padding:5px 12px;border-radius:100px;border:1px solid rgba(255,255,255,0.15);color:rgba(255,255,255,0.7);}
+.hpill.pink{background:rgba(212,83,126,0.2);border-color:rgba(212,83,126,0.4);color:#F4C0D1;}
+.hpill.purple{background:rgba(127,119,221,0.2);border-color:rgba(127,119,221,0.4);color:#CECBF6;}
+.hpill.teal{background:rgba(29,158,117,0.2);border-color:rgba(29,158,117,0.4);color:#9FE1CB;}
+
+/* Summary cards */
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.hgcard{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:1.25rem;}
+.hgcard h3{font-size:13px;font-weight:600;color:rgba(255,255,255,0.5);margin-bottom:.75rem;letter-spacing:0.06em;}
+.hgcard ul{list-style:none;}
+.hgcard ul li{font-size:13px;color:rgba(255,255,255,0.8);padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.06);display:flex;align-items:flex-start;gap:6px;}
+.hgcard ul li:last-child{border-bottom:none;}
+.hgcard ul li::before{content:'›';color:#D4537E;font-weight:700;flex-shrink:0;}
+.hero-verdict{background:rgba(212,83,126,0.15);border:1px solid rgba(212,83,126,0.3);border-radius:12px;padding:1.25rem 1.5rem;margin-top:12px;display:flex;align-items:center;gap:1rem;}
+.verdict-badge{background:#D4537E;color:#fff;font-size:12px;font-weight:700;padding:6px 14px;border-radius:100px;white-space:nowrap;}
+.verdict-text{font-size:13px;color:rgba(255,255,255,0.8);line-height:1.6;}
+
+/* ─── CONTENT WRAPPER ─── */
+.content{max-width:900px;margin:0 auto;padding:2rem 1.5rem;}
+
+/* ─── CARDS ─── */
+.card{background:#fff;border:1px solid #e8e4de;border-radius:12px;padding:1.25rem;margin-bottom:12px;}
+.card-title{font-size:14px;font-weight:600;margin-bottom:.75rem;display:flex;align-items:center;gap:8px;}
+.card p{font-size:13px;color:#444;line-height:1.7;}
+.card ul{padding-left:1.1rem;}
+.card ul li{font-size:13px;color:#444;line-height:1.8;}
+
+.sec-header{display:flex;align-items:center;gap:8px;margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:2px solid #f0ede8;}
+.sec-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.sec-header h2{font-size:18px;font-weight:700;}
+.sec-header p{font-size:13px;color:#888;margin-left:auto;}
+
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.grid4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px;}
+
+/* colored cards */
+.cc-pink{background:#FBEAF0;border-color:#F4C0D1;}
+.cc-pink .card-title{color:#72243E;}
+.cc-pink p,.cc-pink li{color:#72243E!important;}
+.cc-purple{background:#EEEDFE;border-color:#CECBF6;}
+.cc-purple .card-title{color:#3C3489;}
+.cc-purple p,.cc-purple li{color:#3C3489!important;}
+.cc-teal{background:#E1F5EE;border-color:#9FE1CB;}
+.cc-teal .card-title{color:#085041;}
+.cc-teal p,.cc-teal li{color:#085041!important;}
+.cc-amber{background:#FAEEDA;border-color:#FAC775;}
+.cc-amber .card-title{color:#633806;}
+.cc-amber p,.cc-amber li{color:#633806!important;}
+.cc-blue{background:#E6F1FB;border-color:#B5D4F4;}
+.cc-blue .card-title{color:#0C447C;}
+.cc-blue p,.cc-blue li{color:#0C447C!important;}
+.cc-red{background:#FCEBEB;border-color:#F7C1C1;}
+.cc-red .card-title{color:#791F1F;}
+.cc-red p,.cc-red li{color:#791F1F!important;}
+
+/* stat cards */
+.statcard{background:#fff;border:1px solid #e8e4de;border-radius:12px;padding:1rem 1.25rem;text-align:center;}
+.statcard .num{font-size:24px;font-weight:800;color:#D4537E;margin-bottom:2px;}
+.statcard .unit{font-size:13px;font-weight:400;color:#D4537E;}
+.statcard .lbl{font-size:12px;color:#888;}
+.statcard .sub{font-size:11px;color:#aaa;margin-top:2px;}
+
+/* table */
+.tbl{width:100%;border-collapse:collapse;}
+.tbl th{font-size:12px;color:#888;font-weight:500;text-align:left;padding:8px 10px;border-bottom:1px solid #e8e4de;background:#faf9f7;}
+.tbl td{font-size:13px;padding:8px 10px;border-bottom:1px solid #f0ede8;color:#333;}
+.tbl tr:last-child td{border-bottom:none;}
+.tbl tr:hover td{background:#faf9f7;}
+
+/* badge */
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:100px;}
+.b-pink{background:#FBEAF0;color:#993556;}
+.b-purple{background:#EEEDFE;color:#534AB7;}
+.b-teal{background:#E1F5EE;color:#0F6E56;}
+.b-blue{background:#E6F1FB;color:#185FA5;}
+.b-amber{background:#FAEEDA;color:#854F0B;}
+.b-red{background:#FCEBEB;color:#A32D2D;}
+.b-gray{background:#F1EFE8;color:#444441;}
+
+/* accordion */
+.acc-item{background:#fff;border:1px solid #e8e4de;border-radius:10px;margin-bottom:8px;overflow:hidden;}
+.acc-head{padding:.9rem 1.25rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;font-size:14px;font-weight:600;}
+.acc-head:hover{background:#faf9f7;}
+.acc-arrow{color:#aaa;transition:transform .2s;font-size:16px;}
+.acc-item.open .acc-arrow{transform:rotate(180deg);}
+.acc-body{display:none;padding:0 1.25rem 1rem;border-top:1px solid #f0ede8;}
+.acc-item.open .acc-body{display:block;}
+
+/* tip list */
+.tip-list{list-style:none;}
+.tip-list li{font-size:13px;color:#444;padding:6px 0;border-bottom:1px solid #f5f3f0;display:flex;gap:8px;line-height:1.6;}
+.tip-list li:last-child{border-bottom:none;}
+.tip-icon{flex-shrink:0;width:20px;text-align:center;}
+
+/* flow */
+.flow{display:flex;align-items:stretch;gap:8px;flex-wrap:wrap;margin:1rem 0;}
+.flow-box{flex:1;min-width:120px;background:#fff;border:1px solid #e8e4de;border-radius:10px;padding:.9rem 1rem;text-align:center;}
+.flow-step{font-size:10px;color:#D4537E;font-weight:700;letter-spacing:.06em;margin-bottom:4px;}
+.flow-title{font-size:13px;font-weight:600;color:#1a1a1a;margin-bottom:4px;}
+.flow-desc{font-size:11px;color:#888;line-height:1.4;}
+.flow-arrow{display:flex;align-items:center;color:#ddd;font-size:18px;flex-shrink:0;}
+
+/* revenue table */
+.rev-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid #f0ede8;}
+.rev-row:last-child{border-bottom:none;}
+.rev-source{flex:1;font-size:13px;color:#333;}
+.rev-amount{font-size:13px;font-weight:600;color:#D4537E;min-width:130px;text-align:right;}
+.rev-who{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end;min-width:180px;}
+
+/* highlight box */
+.hbox{border-radius:10px;padding:1rem 1.25rem;margin-bottom:12px;}
+.hbox-pink{background:#FBEAF0;border-left:3px solid #D4537E;}
+.hbox-purple{background:#EEEDFE;border-left:3px solid #7F77DD;}
+.hbox-teal{background:#E1F5EE;border-left:3px solid #1D9E75;}
+.hbox-amber{background:#FAEEDA;border-left:3px solid #BA7517;}
+.hbox-blue{background:#E6F1FB;border-left:3px solid #185FA5;}
+.hbox p{font-size:13px;line-height:1.7;}
+
+/* contact card */
+.contact-card{background:#fff;border:1px solid #e8e4de;border-radius:10px;padding:1rem 1.25rem;display:flex;gap:12px;align-items:flex-start;}
+.contact-icon{width:38px;height:38px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.contact-name{font-size:14px;font-weight:600;margin-bottom:2px;}
+.contact-role{font-size:12px;color:#888;margin-bottom:4px;}
+.contact-info{font-size:12px;color:#555;}
+
+/* doc library */
+.doc-category{margin-bottom:1.5rem;}
+.doc-category-title{font-size:13px;font-weight:700;color:#888;letter-spacing:.06em;margin-bottom:.5rem;padding-bottom:.4rem;border-bottom:1px solid #e8e4de;}
+.doc-list{display:flex;flex-direction:column;gap:6px;}
+.doc-item{background:#fff;border:1px solid #e8e4de;border-radius:8px;padding:.8rem 1rem;display:flex;align-items:center;gap:12px;cursor:pointer;transition:border-color .2s;}
+.doc-item:hover{border-color:#D4537E;}
+.doc-icon{width:36px;height:36px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.doc-name{font-size:13px;font-weight:600;margin-bottom:1px;}
+.doc-meta{font-size:11px;color:#aaa;}
+.doc-link{margin-left:auto;font-size:12px;color:#D4537E;font-weight:600;white-space:nowrap;}
+.doc-placeholder{background:#faf9f7;border:1.5px dashed #ddd;border-radius:8px;padding:1.5rem;text-align:center;}
+.doc-placeholder p{font-size:13px;color:#aaa;}
+.upload-note{font-size:12px;color:#999;background:#f7f5f2;border-radius:8px;padding:.75rem 1rem;margin-top:.5rem;}
+
+/* appendix */
+.appendix{background:#1a1228;color:#fff;margin-top:2rem;}
+.appendix-header{padding:2rem 1.5rem 1rem;border-bottom:1px solid rgba(255,255,255,0.1);}
+.appendix-title{font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:.1em;margin-bottom:.4rem;}
+.appendix-h{font-size:22px;font-weight:700;color:#fff;margin-bottom:.3rem;}
+.appendix-sub{font-size:13px;color:rgba(255,255,255,0.5);}
+.appendix-content{max-width:900px;margin:0 auto;padding:1.5rem;}
+.acard{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:12px;padding:1.25rem;margin-bottom:12px;}
+.acard h3{font-size:14px;font-weight:600;color:rgba(255,255,255,0.9);margin-bottom:.75rem;}
+.acard p,.acard li{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.7;}
+.acard ul{padding-left:1.1rem;}
+.acard .step{font-size:10px;color:#D4537E;font-weight:700;letter-spacing:.06em;margin-bottom:4px;}
+.a-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;}
+.a-flow-box{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:.75rem;text-align:center;}
+.a-flow-box .s{font-size:10px;color:#D4537E;font-weight:700;margin-bottom:4px;}
+.a-flow-box .t{font-size:12px;font-weight:600;color:#fff;margin-bottom:3px;}
+.a-flow-box .d{font-size:11px;color:rgba(255,255,255,0.5);line-height:1.4;}
+.a-rev{display:flex;flex-direction:column;gap:6px;}
+.a-rev-row{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.05);border-radius:8px;padding:.6rem 1rem;}
+.a-rev-src{flex:1;font-size:12px;color:rgba(255,255,255,0.7);}
+.a-rev-amt{font-size:12px;font-weight:600;color:#D4537E;min-width:110px;text-align:right;}
+.next-steps{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;}
+.ns-card{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:10px;padding:1rem;}
+.ns-num{font-size:10px;color:#D4537E;font-weight:700;letter-spacing:.06em;margin-bottom:5px;}
+.ns-card h4{font-size:13px;font-weight:600;color:#fff;margin-bottom:4px;}
+.ns-card p{font-size:12px;color:rgba(255,255,255,0.55);line-height:1.5;}
+
+footer{background:#120d1e;padding:1.5rem;text-align:center;border-top:1px solid rgba(255,255,255,0.08);}
+footer p{font-size:12px;color:rgba(255,255,255,0.3);}
+
+@media(max-width:640px){
+  .hero-stats{grid-template-columns:repeat(2,1fr);}
+  .hero-grid{grid-template-columns:1fr;}
+  .grid2,.grid3,.grid4{grid-template-columns:1fr;}
+  .a-flow{grid-template-columns:1fr 1fr;}
+  .next-steps{grid-template-columns:1fr;}
+  .hero-title{font-size:22px;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="tb-logo">
+    <div class="tb-dots">
+      <span style="background:#D4537E;"></span>
+      <span style="background:#7F77DD;"></span>
+      <span style="background:#1D9E75;"></span>
+    </div>
+    <span class="tb-name">MUSE I · 카자흐스탄 인텔리전스 허브</span>
+  </div>
+  <div class="tb-right">
+    <span class="tb-kz">🇰🇿 Kazakhstan</span>
+    <span class="tb-badge">🔒 Members Only</span>
+  </div>
+</div>
+
+<!-- GNB -->
+<div class="gnb" id="gnb">
+  <div class="gnb-item active" onclick="showSection('hero')"><span class="gi">🏠</span> 홈</div>
+  <div class="gnb-item" onclick="showSection('overview')"><span class="gi">🇰🇿</span> 국가 개요</div>
+  <div class="gnb-item" onclick="showSection('economy')"><span class="gi">📊</span> 경제 &amp; 투자</div>
+  <div class="gnb-item" onclick="showSection('hallyu')"><span class="gi">🎤</span> 한류 &amp; 문화</div>
+  <div class="gnb-item" onclick="showSection('performance')"><span class="gi">🎪</span> 공연 인프라</div>
+  <div class="gnb-item" onclick="showSection('biz')"><span class="gi">🏢</span> 비즈니스 환경</div>
+  <div class="gnb-item" onclick="showSection('travel')"><span class="gi">✈️</span> 출장 &amp; 여행</div>
+  <div class="gnb-item" onclick="showSection('living')"><span class="gi">🛡️</span> 현지 생활 TIP</div>
+  <div class="gnb-item" onclick="showSection('network')"><span class="gi">🤝</span> 협력 네트워크</div>
+  <div class="gnb-item" onclick="showSection('docs')"><span class="gi">📂</span> 자료실</div>
+</div>
+
+<!-- ══════════════════════════════════
+     HERO (홈)
+══════════════════════════════════ -->
+<div class="section active" id="sec-hero">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">
+        <div style="display:flex;gap:4px;"><span style="width:6px;height:6px;border-radius:50%;background:#D4537E;display:block;"></span><span style="width:6px;height:6px;border-radius:50%;background:#7F77DD;display:block;"></span><span style="width:6px;height:6px;border-radius:50%;background:#1D9E75;display:block;"></span></div>
+        <span class="hero-tag-text">MUSE I PROJECT 2026 · KAZAKHSTAN INTELLIGENCE HUB</span>
+      </div>
+      <div class="hero-title">카자흐스탄, 지금이 <span>골든타임</span>입니다.</div>
+      <div class="hero-sub">K-컬처 수요는 폭발 직전 — 공급은 여전히 공백. 뮤즈아이가 CIS 2억 8천만 시장의 첫 번째 K-컬처 허브가 됩니다.</div>
+      <div class="hero-stats">
+        <div class="hstat"><div class="hstat-num">2,059<span style="font-size:14px;">만</span></div><div class="hstat-lbl">카자흐스탄 인구</div></div>
+        <div class="hstat"><div class="hstat-num">2.8<span style="font-size:14px;">억</span></div><div class="hstat-lbl">CIS 전체 인구</div></div>
+        <div class="hstat"><div class="hstat-num">10<span style="font-size:14px;">만</span></div><div class="hstat-lbl">현지 고려인</div></div>
+        <div class="hstat"><div class="hstat-num">2027</div><div class="hstat-lbl">K-파크 완공 목표</div></div>
+      </div>
+      <div class="hero-pills">
+        <span class="hpill pink">🎤 K-공연 수요 폭발 직전</span>
+        <span class="hpill purple">🤖 AI 탤런트 파이프라인 (KTES)</span>
+        <span class="hpill teal">🌍 CIS 러시아어권 최초 진입 기회</span>
+        <span class="hpill">🏗️ K-파크 선점 협의 필요</span>
+        <span class="hpill">💱 2026 한-카 정상외교 황금기</span>
+      </div>
+      <div class="hero-grid">
+        <div class="hgcard">
+          <h3>✅ 핵심 기회 요인</h3>
+          <ul>
+            <li>K-공연 단독 콘서트 공급 부재 — 수요 대기 중</li>
+            <li>2026 한-카 정상외교 황금기, 정부 지원 분위기</li>
+            <li>고려인 10만 명의 현지 네트워크 · 친한 정서</li>
+            <li>K-파크 2027 완공 — 선점 입점 가능한 마지막 타이밍</li>
+            <li>Q-Pop 성장으로 아이돌·팬덤 문화 기반 완성</li>
+            <li>KTES 경쟁사 전무 — 블루오션 상태</li>
+            <li>CIS 러시아어권 2억 8천만 명 미개척 시장</li>
+          </ul>
+        </div>
+        <div class="hgcard">
+          <h3>⚠️ 리스크 & 주의 사항</h3>
+          <ul>
+            <li>VAT 2026년 12% → 16% 인상, 마진 재계산 필수</li>
+            <li>텡게화 환율 변동성 — 임대료 달러 연동 주의</li>
+            <li>상표권 현지 브로커 선점 위험 → 조기 출원 필수</li>
+            <li>현지 파트너 신뢰도 검증 필수 (계약서 공증)</li>
+            <li>내륙국 물류·통관 비용 및 지연 리스크</li>
+            <li>러시아어+카자흐어 이중 운영 인력 확보 필요</li>
+            <li>전문 공연 기획 노하우 현지 인력 부족</li>
+          </ul>
+        </div>
+        <div class="hgcard">
+          <h3>📈 시장 매력도 지표</h3>
+          <ul>
+            <li>중앙아시아 GDP 1위 — 구매력 최고</li>
+            <li>SNS 이용률 80%+ — 디지털 마케팅 최적</li>
+            <li>중위 연령 30대 초반 — 핵심 K-Pop 소비층</li>
+            <li>한국 화장품 수입 연간 1억 달러 돌파 임박</li>
+            <li>CU 편의점 5년 내 500개 목표 — 한류 인프라 확장 중</li>
+            <li>2026 디지털화의 해 지정 — AI·에듀테크 친화</li>
+          </ul>
+        </div>
+        <div class="hgcard">
+          <h3>🗺️ 3단계 진입 전략</h3>
+          <ul>
+            <li><strong>Phase 1</strong> — K-공연 개최 · 초기 자금 확보 · 네트워크 구축</li>
+            <li><strong>Phase 2</strong> — 알마티 법인(TOO) 설립 · K-파크 입점 협의</li>
+            <li><strong>Phase 3</strong> — KTES 가동 · MUSE-I CIS 유튜브 방송국 론칭</li>
+            <li>박성진 대표 아티스트 인프라 → Phase 1 핵심 자산</li>
+            <li>GBK Nexus AI 플랫폼 → Phase 3 기술 기반</li>
+            <li>한지섭 대표 SMTOWN 네트워크 → 전 구간 활용</li>
+          </ul>
+        </div>
+      </div>
+      <!-- NEXT STEPS in hero -->
+      <div style="margin-top:12px;">
+        <div style="font-size:11px;color:rgba(255,255,255,0.4);letter-spacing:.1em;margin-bottom:8px;">NEXT STEPS · 뮤즈아이 즉시 실행 과제</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:.9rem 1rem;">
+            <div style="font-size:10px;color:#D4537E;font-weight:700;letter-spacing:.06em;margin-bottom:4px;">STEP 01</div>
+            <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:3px;">한국 법인 설립</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.5;">뮤즈아이 한국 법인 → 카자흐 TOO 자회사 구조. C5 비자 절차 간소화.</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:.9rem 1rem;">
+            <div style="font-size:10px;color:#D4537E;font-weight:700;letter-spacing:.06em;margin-bottom:4px;">STEP 02</div>
+            <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:3px;">상표권 선출원</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.5;">KOTRA IP-DESK로 Qazpatent 출원. 비용 50~70% 환급. 지금 즉시 시작.</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:.9rem 1rem;">
+            <div style="font-size:10px;color:#D4537E;font-weight:700;letter-spacing:.06em;margin-bottom:4px;">STEP 03</div>
+            <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:3px;">공연 아티스트 확정</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.5;">박성진 대표 인프라로 EXO 계열 아티스트 알마티 공연 일정 협의.</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:.9rem 1rem;">
+            <div style="font-size:10px;color:#D4537E;font-weight:700;letter-spacing:.06em;margin-bottom:4px;">STEP 04</div>
+            <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:3px;">KOTRA 알마티 연결</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.5;">시장조사·법인 자문 의뢰. 카스피안 그룹(K-파크) 미팅 주선 요청.</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:.9rem 1rem;">
+            <div style="font-size:10px;color:#D4537E;font-weight:700;letter-spacing:.06em;margin-bottom:4px;">STEP 05</div>
+            <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:3px;">GBK × 뮤즈아이 MOU</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.5;">KTES 카자흐스탄 모델 정식 협업 계약. 수익 분배 구조 확정.</div>
+          </div>
+          <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);border-radius:10px;padding:.9rem 1rem;">
+            <div style="font-size:10px;color:#D4537E;font-weight:700;letter-spacing:.06em;margin-bottom:4px;">STEP 06</div>
+            <div style="font-size:13px;font-weight:600;color:#fff;margin-bottom:3px;">러시아어 IR 자료</div>
+            <div style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.5;">현지 파트너·투자자용 러시아어 뮤즈아이 소개서 + KTES 시각화.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-verdict">
+        <span class="verdict-badge">종합 평가</span>
+        <span class="verdict-text">카자흐스탄은 <strong>한류 수요는 성숙, 전문 공급은 공백</strong> 상태입니다. 2027년 K-파크 완공 전 진입하는 팀이 CIS K-컬처 시장의 퍼스트무버가 됩니다. 뮤즈아이가 가진 아티스트 인프라(박성진)·SMTOWN 네트워크(한지섭)·AI 플랫폼(GBK)의 3각 조합은 현재 시장에서 유일한 경쟁력입니다.</span>
+      </div>
+    </div>
+  </div>
+  <div style="background:#fff;padding:1rem 1.5rem;text-align:center;border-bottom:1px solid #e8e4de;">
+    <p style="font-size:13px;color:#888;">상단 메뉴를 클릭해 각 분야 상세 정보를 확인하세요 · 아래로 스크롤하면 KTES 전략 Appendix로 이동합니다</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     1. 국가 개요
+══════════════════════════════════ -->
+<div class="section" id="sec-overview">
+<div class="content">
+  <div class="sec-header"><div class="sec-dot" style="background:#D4537E;"></div><h2>🇰🇿 국가 개요</h2><p>기본 정보 · 지리 · 민족 · 역사</p></div>
+
+  <div class="grid4" style="margin-bottom:12px;">
+    <div class="statcard"><div class="num">272<span class="unit">만㎢</span></div><div class="lbl">국토 면적</div><div class="sub">한반도의 12배 · 세계 9위</div></div>
+    <div class="statcard"><div class="num">2,059<span class="unit">만</span></div><div class="lbl">인구</div><div class="sub">알마티 · 아스타나 중심</div></div>
+    <div class="statcard"><div class="num">30<span class="unit">대 초</span></div><div class="lbl">중위 연령</div><div class="sub">젊은 인구 구조</div></div>
+    <div class="statcard"><div class="num">100<span class="unit">개+</span></div><div class="lbl">민족 구성</div><div class="sub">카자흐 70% · 러시아 15%</div></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">🏙️ 주요 도시</div>
+      <table class="tbl">
+        <tr><th>도시</th><th>특징</th></tr>
+        <tr><td><strong>아스타나 (Astana)</strong></td><td>현재 수도 · 행정 중심 · 계획 도시</td></tr>
+        <tr><td><strong>알마티 (Almaty)</strong></td><td>경제·문화 중심 · 한류 팬덤 집중 · 구 수도</td></tr>
+        <tr><td><strong>쉼켄트 (Shymkent)</strong></td><td>남부 최대 도시 · 성장 중</td></tr>
+      </table>
+      <div class="hbox hbox-pink" style="margin-top:10px;">
+        <p>💡 <strong>비즈니스 우선순위:</strong> 한류 팬덤 70% 이상이 알마티에 집중. 첫 사업은 반드시 알마티에서 시작해야 합니다.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">🗣️ 언어 & 종교</div>
+      <ul>
+        <li><strong>국어:</strong> 카자흐어 — 최근 젊은 층 사용 급증, 마케팅 병행 필수</li>
+        <li><strong>공용어:</strong> 러시아어 — 비즈니스·행정에서 여전히 필수</li>
+        <li><strong>종교:</strong> 이슬람 약 70%, 러시아 정교회 약 26%</li>
+        <li><strong>비즈니스 팁:</strong> 러시아어 계약서 + 카자흐어 공증 번역본 필수</li>
+        <li><strong>SNS 전략:</strong> 러시아어 콘텐츠 기본, 카자흐어 병행 시 현지 호감도 급상승</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">👨‍👩‍👧 고려인 (한인 동포) — 비즈니스 핵심 자산</div>
+    <div class="grid2">
+      <div>
+        <p>1937년 소련 스탈린 정권의 강제 이주 정책으로 연해주에서 중앙아시아로 이송된 한인 후손 약 <strong>10만 명</strong>이 카자흐스탄에 거주합니다. 척박한 환경을 이겨내고 현재는 유통·농업·IT 등 주요 산업 분야에서 강한 영향력을 갖고 있습니다.</p>
+        <div class="hbox hbox-teal" style="margin-top:10px;">
+          <p>✅ CU 현지 파트너 <strong>신라인 그룹</strong>도 고려인 기업. K-파크 주도 <strong>카스피안 그룹</strong>(최유리 회장)도 고려인 대기업. 이들 네트워크가 뮤즈아이의 핵심 진입 경로입니다.</p>
+        </div>
+      </div>
+      <div>
+        <ul>
+          <li>현지 대형 유통망 고려인 기업 다수 보유</li>
+          <li>한국 문화·언어에 대한 친근감 매우 높음</li>
+          <li>KOTRA 알마티 무역관 통해 고려인 비즈니스 네트워크 접근 가능</li>
+          <li>고려인 협회 통한 현지 커뮤니티 마케팅 효과적</li>
+          <li>2027년 강제 이주 90주년 — 대형 문화 행사 예정 (브랜드 론칭 최적 타이밍)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">🌤️ 기후 & 계절별 비즈니스 전략</div>
+    <table class="tbl">
+      <tr><th>지역</th><th>여름 (7월)</th><th>겨울 (1월)</th><th>특징</th></tr>
+      <tr><td><strong>알마티</strong></td><td>25~30°C</td><td>-2~-10°C</td><td>사계절 뚜렷 · 살기 좋음 · 비즈니스 중심</td></tr>
+      <tr><td><strong>아스타나</strong></td><td>20~25°C</td><td>-15~-20°C</td><td>세계 2번째로 추운 수도 · 겨울 극한</td></tr>
+      <tr><td><strong>중서부 스텝</strong></td><td>35~40°C+</td><td>-10~-15°C</td><td>건조·극단적 대륙성 기후</td></tr>
+    </table>
+    <div class="grid3" style="margin-top:10px;">
+      <div class="hbox hbox-pink"><p>🎤 <strong>공연 성수기:</strong> 5~9월. 유동인구 최다, 행사 집중. 티켓 가격 최고점.</p></div>
+      <div class="hbox hbox-amber"><p>📚 <strong>아카데미 성수기:</strong> 5월 말~8월 말 여름방학 3개월. 수강생 모집 최대 대목.</p></div>
+      <div class="hbox hbox-blue"><p>❄️ <strong>겨울 주의:</strong> 난방비 여름 대비 2~3배. 운영비 예산 여유분 필수.</p></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">🗓️ 현지 학교 방학 스케줄 (수강생 모집 타이밍)</div>
+    <table class="tbl">
+      <tr><th>방학</th><th>시기</th><th>기간</th><th>비즈니스 활용</th></tr>
+      <tr><td>가을방학</td><td>10월 말~11월 초</td><td>약 1주</td><td>원데이 클래스 · 팝업 이벤트</td></tr>
+      <tr><td>겨울방학</td><td>12월 말~1월 초</td><td>약 2주</td><td>신년 특강 · 한국어 집중반</td></tr>
+      <tr><td>봄방학 (나우리즈)</td><td>3월 중~말</td><td>약 2주</td><td>나우리즈 연계 K-Pop 이벤트</td></tr>
+      <tr><td><strong>여름방학 ★</strong></td><td><strong>5월 25일~8월 말</strong></td><td><strong>약 3개월</strong></td><td><strong>속성 캠프 · 마스터 클래스 · 연간 매출 핵심</strong></td></tr>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════
+     2. 경제 & 투자
+══════════════════════════════════ -->
+<div class="section" id="sec-economy">
+<div class="content">
+  <div class="sec-header"><div class="sec-dot" style="background:#7F77DD;"></div><h2>📊 경제 & 투자 환경</h2><p>환율 · 물가 · 세금 · 자원</p></div>
+
+  <div class="grid4" style="margin-bottom:12px;">
+    <div class="statcard"><div class="num">1달러<span class="unit">≈470</span></div><div class="lbl">텡게 환율</div><div class="sub">USD/KZT 기준</div></div>
+    <div class="statcard"><div class="num">1텡게<span class="unit">≈3.2</span></div><div class="lbl">원화 환산</div><div class="sub">1,000텡게≈3,200원</div></div>
+    <div class="statcard"><div class="num">7~8<span class="unit">%</span></div><div class="lbl">연간 물가상승률</div><div class="sub">수입 공산품 중심</div></div>
+    <div class="statcard"><div class="num">16<span class="unit">%</span></div><div class="lbl">VAT (2026~)</div><div class="sub">기존 12%에서 인상</div></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">💱 환율 & 환리스크 관리</div>
+      <ul>
+        <li>텡게화는 글로벌 유가·달러에 민감하게 연동</li>
+        <li>한국 출발 시 <strong>USD 100달러 신권</strong>으로 환전 후 현지 사설 환전소 이용이 가장 유리</li>
+        <li>임대차 계약 시 임대료 <strong>텡게화 고정 금액</strong>으로 협상 필수 (달러 연동 조건은 위험)</li>
+        <li>장기 계약 시 환율 변동 폭 ±N% 초과 시 단가 조정 조항 삽입 권장</li>
+        <li>카자흐스탄 중앙은행 고금리 기조 — 현지 대출보다 초기 자본 안정 확보 우선</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">🏗️ 자원 강국 — 경제 안정성</div>
+      <ul>
+        <li><strong>우라늄</strong> 매장량 세계 2위, 최대 생산국</li>
+        <li>석유·천연가스·리튬·희토류 세계적 공급처</li>
+        <li>2026년 수천만 톤 규모 희토류 매장지 신규 발견</li>
+        <li>한국 정부 핵심광물 확보 위해 카자흐스탄 중점 협력</li>
+        <li>자원 수출 → 경제 안정 → 한국 브랜드 신뢰도 상승 낙수효과</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">💼 인건비 가이드 (알마티 기준, 2026)</div>
+    <table class="tbl">
+      <tr><th>직종</th><th>월급 (KZT)</th><th>원화 환산</th><th>비고</th></tr>
+      <tr><td>일반 매장직원/알바</td><td>180,000~250,000</td><td>약 57~80만원</td><td>시급제 또는 기본급+인센티브</td></tr>
+      <tr><td>매장 매니저/점장급</td><td>350,000~500,000</td><td>약 112~160만원</td><td>재고·정산 총괄</td></tr>
+      <tr><td>댄스 아카데미 강사</td><td>300,000~600,000+</td><td>약 96~192만원+</td><td>경력·수업 시수별 편차 큼</td></tr>
+      <tr><td><strong>한국어 가능 현지 직원</strong></td><td><strong>500,000~800,000</strong></td><td><strong>약 160~256만원</strong></td><td>K-비즈니스 핵심 인력 · 몸값 높음</td></tr>
+      <tr><td>알마티 전체 평균</td><td>약 460,000</td><td>약 147만원</td><td>IT·금융 포함 평균치</td></tr>
+    </table>
+    <div class="hbox hbox-amber" style="margin-top:10px;">
+      <p>⚠️ <strong>고용주 추가 부담:</strong> 사회세 9.5% + 사회보험 3.5% + 의료보험 3.0% = 급여의 약 16% 추가 납부 필요. 30만 텡게 지급 시 약 34만 텡게 예산 필요.</p>
+    </div>
+    <div class="hbox hbox-blue" style="margin-top:8px;">
+      <p>📌 <strong>협상 팁:</strong> 현지 직원들은 세후 실수령액(Net) 기준으로 협상하려는 경향 강함. 반드시 세전(Gross) 기준임을 명확히 해야 분쟁 없음.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">🏠 상가 임대료 시세 (알마티 기준)</div>
+    <table class="tbl">
+      <tr><th>상권 유형</th><th>㎡당 월 임대료 (KZT)</th><th>30평(100㎡) 월세</th></tr>
+      <tr><td>A급 대형 쇼핑몰 (Dostyk Plaza, Mega)</td><td>25,000~45,000</td><td>약 800만~1,400만원</td></tr>
+      <tr><td>B급 일반 쇼핑몰 / 푸드코트</td><td>15,000~25,000</td><td>약 480만~800만원</td></tr>
+      <tr><td>시내 중심가 로드숍 (1층)</td><td>12,000~20,000</td><td>약 380만~640만원</td></tr>
+      <tr><td>구시가지 / 주거지 이면도로</td><td>6,000~10,000</td><td>약 190만~320만원</td></tr>
+    </table>
+    <ul style="margin-top:10px;">
+      <li>보증금 통상 1~2달 치 월세 (한국식 전세금 없음)</li>
+      <li>관리비(난방·전기·수도) 별도 청구 — 겨울철 2~3배 급증</li>
+      <li>인테리어 공사 기간 렌트프리(Rent Free) 1~2달 협상 적극 요구</li>
+      <li>부동산 플랫폼: <strong>Krisha.kz</strong> 실시간 시세 확인 가능</li>
+    </ul>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">⚡ 전력 & 수도 인프라</div>
+    <div class="grid2">
+      <div>
+        <strong>전력</strong>
+        <ul style="margin-top:6px;">
+          <li>대도시 공급 비교적 안정적</li>
+          <li>겨울·여름 피크 시 노후 선로 불시 단전 간헐 발생</li>
+          <li>댄스학원: 대형 오디오·조명·에어컨 동시 사용 → 계약 전력 용량 확인 필수</li>
+          <li>중요 기기에 UPS(무정전 전원 장치) 설치 권장</li>
+          <li>대형 몰 입점 시 자체 발전기로 단전 리스크 해소</li>
+        </ul>
+      </div>
+      <div>
+        <strong>수도 & 난방</strong>
+        <ul style="margin-top:6px;">
+          <li>소련식 중앙난방 시스템 (도시 전체 열병합 발전소 연결)</li>
+          <li>매년 봄 1~2주 온수 전면 중단 (배관 정비) — 개별 전기 온수기 백업 필수</li>
+          <li>석회질 성분 함유 — 에스프레소 머신·제빙기에 상업용 정수 필터 필수</li>
+          <li>대형 몰 입점 시 수도 인프라 문제 해소</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════
+     3. 한류 & 문화
+══════════════════════════════════ -->
+<div class="section" id="sec-hallyu">
+<div class="content">
+  <div class="sec-header"><div class="sec-dot" style="background:#D4537E;"></div><h2>🎤 한류 & 문화</h2><p>K-Pop · K-드라마 · K-푸드 · SNS · 팬덤</p></div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">🎵 K-Pop 인기 순위</div>
+      <table class="tbl">
+        <tr><th>순위</th><th>아티스트</th><th>특징</th></tr>
+        <tr><td>1위</td><td><strong>BTS</strong></td><td>압도적 1위 · 군복무 중에도 결속력 강한 팬덤</td></tr>
+        <tr><td>2위</td><td><strong>BLACKPINK</strong></td><td>가장 높은 대중 인지도 · 커버댄스 1위</td></tr>
+        <tr><td>3위</td><td><strong>Stray Kids</strong></td><td>현재 폭발적 성장 중 · 중앙아시아 취향 부합</td></tr>
+        <tr><td>4위</td><td><strong>SEVENTEEN / ENHYPEN</strong></td><td>코어 팬덤 탄탄</td></tr>
+        <tr><td>특이</td><td><strong>EXO · 수호 · 찬열</strong></td><td>CIS 전역 시니어 팬덤 강함 · 경제력 있는 2030</td></tr>
+      </table>
+      <div class="hbox hbox-pink" style="margin-top:10px;">
+        <p>💡 <strong>뮤즈아이 강점:</strong> EXO 찬열(박찬열)의 부친 박성진 대표가 멤버. CIS에서 EXO 팬덤 파급력은 독보적.</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">📺 K-드라마 인기 순위</div>
+      <table class="tbl">
+        <tr><th>순위</th><th>드라마/배우</th><th>비고</th></tr>
+        <tr><td>배우 1위</td><td><strong>이민호</strong></td><td>수년째 부동의 1위 · 카자흐 국민 인식 = "한국 미남 배우"</td></tr>
+        <tr><td>배우 2위</td><td><strong>공유</strong></td><td>도깨비 · 오징어 게임 · 전 연령층 인기</td></tr>
+        <tr><td>배우 3위</td><td><strong>현빈</strong></td><td>사랑의 불시착 장기 흥행</td></tr>
+        <tr><td>드라마</td><td>오징어게임 · 사랑의불시착 · 눈물의여왕</td><td>넷플릭스 통해 확산</td></tr>
+        <tr><td>특이</td><td><strong>로몬(박솔로몬)</strong></td><td>우즈베키스탄 고려인 출신 → 중앙아시아 전역 '우리 스타' 인식</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">🍜 K-푸드 현황 & 인기 메뉴</div>
+    <div class="grid2">
+      <div>
+        <strong>인기 TOP 5</strong>
+        <ol style="padding-left:1.2rem;margin-top:6px;">
+          <li style="font-size:13px;color:#444;padding:3px 0;">김치 — 이미 현지화된 상태</li>
+          <li style="font-size:13px;color:#444;padding:3px 0;">떡볶이 — 매운맛 챌린지 SNS 바이럴</li>
+          <li style="font-size:13px;color:#444;padding:3px 0;">한국식 치킨 — 닭고기 소비 문화와 결합</li>
+          <li style="font-size:13px;color:#444;padding:3px 0;">비빔밥 — 한국 레스토랑 스테디셀러</li>
+          <li style="font-size:13px;color:#444;padding:3px 0;">삼겹살 — K-BBQ 중상류층 외식 트렌드</li>
+        </ol>
+      </div>
+      <div>
+        <strong>프랜차이즈 진출 현황</strong>
+        <ul style="margin-top:6px;">
+          <li><strong>CU 편의점:</strong> 알마티 50개+ · 5년 내 500개 목표 · 신라인 그룹과 파트너십</li>
+          <li><strong>BBQ 치킨:</strong> 마스터 프랜차이즈 계약 · 알마티·아스타나 거점</li>
+          <li>K-BBQ · 떡볶이 · 한식 카페 쇼핑몰 푸드코트 입점 확산</li>
+          <li>한국식 포토부스(인생네컷류) 대형 몰 필수 코스화</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">📱 SNS 생태계 & 마케팅 전략</div>
+    <table class="tbl">
+      <tr><th>플랫폼</th><th>이용률</th><th>역할</th><th>뮤즈아이 활용법</th></tr>
+      <tr><td><strong>Instagram</strong></td><td>약 80%</td><td>모든 비즈니스 공식 채널</td><td>DM 예약·문의 실시간 대응 인력 필수</td></tr>
+      <tr><td><strong>TikTok</strong></td><td>약 64%</td><td>K-Pop 커버댄스·챌린지 성지</td><td>학원 숏폼 챌린지 영상 → 전국 바이럴</td></tr>
+      <tr><td><strong>WhatsApp</strong></td><td>약 89%</td><td>1위 메신저</td><td>WhatsApp 비즈니스 계정으로 수강 등록·공연 문의</td></tr>
+      <tr><td><strong>Telegram</strong></td><td>높음</td><td>정보 공유 채널</td><td>팬 커뮤니티·공지 채널 운영</td></tr>
+      <tr><td><strong>Kaspi App</strong></td><td>국민 앱</td><td>결제·쇼핑 통합</td><td>Kaspi Shop 입점 → 굿즈 할부 판매 가능</td></tr>
+    </table>
+    <div class="hbox hbox-purple" style="margin-top:10px;">
+      <p>🚀 <strong>바이럴 치트키:</strong> 매장/학원 내부를 "누가 봐도 숏폼 찍고 싶은" 조명·인테리어로 꾸미면 학생들이 알아서 TikTok 올림 → 광고비 0원 바이럴. 카자흐어 콘텐츠 병행 시 현지 팬 호감도 급상승.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">🎭 Q-Pop (큐팝) — 카자흐스탄 로컬 K-Pop</div>
+    <p>K-Pop 시스템(연습생·칼군무·뮤직비디오)을 벤치마킹해 탄생한 카자흐스탄 자국 아이돌 음악 장르. 대표 그룹 <strong>Ninety One</strong> 등이 1020 세대에게 폭발적 인기. 아이돌 문화·팬덤 문화·응원 문화가 이미 현지에 뿌리내린 상태.</p>
+    <div class="hbox hbox-teal" style="margin-top:10px;">
+      <p>💡 <strong>전략:</strong> 댄스 아카데미에 'Q-Pop 안무 마스터 클래스' 슬쩍 추가 → "한국인이 가르치는 큐팝" 타이틀로 현지 미디어·인플루언서 자발 취재. Korea-Kazakhstan 문화 브릿지 포지셔닝 가능.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">🎉 연간 한류 축제 캘린더</div>
+    <table class="tbl">
+      <tr><th>시기</th><th>행사명</th><th>규모</th><th>비즈니스 기회</th></tr>
+      <tr><td>3월 21~23일</td><td>나우리즈 (Nauryz) 봄맞이 대명절</td><td>국가 전체</td><td>거리 유동인구 폭발 · 팝업 이벤트</td></tr>
+      <tr><td>3~5월</td><td>K-Pop 커버댄스 페스티벌 (지역 예선)</td><td>전국 주요 도시</td><td>학원 대회 준비반 개설 · 브랜드 노출</td></tr>
+      <tr><td>7~8월</td><td>K-Pop 커버댄스 국가 파이널 + 한국 문화제</td><td>1,000명+</td><td>굿즈 부스 운영 · 아카데미 홍보 핵심 대목</td></tr>
+      <tr><td>10월경</td><td>Korea Week (한국 주간)</td><td>도시 전체</td><td>문화원 파트너십 → 공신력 확보</td></tr>
+      <tr><td>음력 1월</td><td>한인 설날 대잔치 (총영사관·한인회)</td><td>교민·현지인</td><td>네트워킹 · 브랜드 소개</td></tr>
+      <tr><td><strong>2027년</strong></td><td><strong>고려인 강제 이주 90주년 기념 행사</strong></td><td><strong>초대형</strong></td><td><strong>K-파크 완공 + 양국 정부 지원 = 브랜드 론칭 최적 타이밍</strong></td></tr>
+    </table>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════
+     4. 공연 인프라
+══════════════════════════════════ -->
+<div class="section" id="sec-performance">
+<div class="content">
+  <div class="sec-header"><div class="sec-dot" style="background:#1D9E75;"></div><h2>🎪 공연 인프라</h2><p>공연장 · 티켓 · 기획사 · 음향장비</p></div>
+
+  <div class="hbox hbox-teal">
+    <p>📌 <strong>시장 현황:</strong> 카자흐스탄 K-Pop 공연 시장은 "수요 폭발 직전, 공급 부재" 상태. 2025년 Chen(EXO) K-Pop Symphony Concert 알마티 매진이 시장 가능성을 증명. 뮤즈아이가 전문 공연 기획 역량으로 진입하면 독점적 포지션 확보 가능.</p>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">🏟️ 공연장 현황 (알마티 + 아스타나)</div>
+    <table class="tbl">
+      <tr><th>공연장</th><th>규모</th><th>위치</th><th>뮤즈아이 활용도</th></tr>
+      <tr><td><strong>알마티 아레나</strong></td><td>12,000~17,000석</td><td>알마티</td><td>최정상 아티스트 · 초기 리스크 큼 → Phase 2 이후</td></tr>
+      <tr><td><strong>할릭 아레나 (Halyk Arena)</strong></td><td>3,000~5,000석</td><td>알마티</td><td>⭐ Phase 1 추천 — 인지도 아티스트 첫 공연 최적</td></tr>
+      <tr><td><strong>공화국 궁전</strong></td><td>약 2,500석</td><td>알마티 중심가</td><td>⭐ Phase 1 추천 — 팬미팅·중소 아이돌 공연 최적</td></tr>
+      <tr><td><strong>학생 궁전</strong></td><td>약 1,500석</td><td>카즈NU 근처</td><td>젊은 층 접근성 최고 · 대관료 저렴</td></tr>
+      <tr><td><strong>바리스 아레나</strong></td><td>11,500석</td><td>아스타나</td><td>수도 북부 팬 타깃 · Phase 2 이후 투어 확장</td></tr>
+      <tr><td><strong>소형 클럽 (Motor Club 등)</strong></td><td>500석 이하</td><td>알마티 시내</td><td>K-Pop DJ 파티 · 힙합 공연 · 저비용 첫 이벤트</td></tr>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">🎟️ 티켓 가격 가이드 (2025 실사례 기준)</div>
+    <div class="grid2">
+      <div>
+        <strong>2025년 Chen K-Pop Symphony Concert 실제 티켓가</strong>
+        <table class="tbl" style="margin-top:6px;">
+          <tr><th>등급</th><th>KZT</th><th>원화</th></tr>
+          <tr><td>저가석</td><td>15,000</td><td>약 4.5만원</td></tr>
+          <tr><td>중간석</td><td>30,000~60,000</td><td>약 8~17만원</td></tr>
+          <tr><td>VIP</td><td>100,000+</td><td>약 28만원+</td></tr>
+        </table>
+      </div>
+      <div>
+        <strong>뮤즈아이 공연 기획 시 권장 가격 구조</strong>
+        <table class="tbl" style="margin-top:6px;">
+          <tr><th>등급</th><th>권장 KZT</th></tr>
+          <tr><td>일반</td><td>10,000~20,000</td></tr>
+          <tr><td>체험 패키지</td><td>30,000~50,000</td></tr>
+          <tr><td>VIP 팬 패키지</td><td>70,000~120,000</td></tr>
+        </table>
+      </div>
+    </div>
+    <div class="hbox hbox-pink" style="margin-top:10px;">
+      <p>⭐ <strong>수익 극대화 전략:</strong> 티켓 단독보다 <strong>티켓 + 굿즈 + 포토 이벤트 + VIP 팬미팅 패키지</strong> 구조로 객단가를 높여야 카자흐스탄 시장에서 흑자 가능. "팬들이 오래 머무는 행사"가 단순 콘서트보다 수익성 높음.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">🔊 현지 음향·조명·무대 장비 업체</div>
+    <p style="margin-bottom:10px;">카자흐스탄에 하드웨어는 존재하지만, K-Pop 연출 특유의 정밀한 칼군무·리프트·특수효과를 소화한 경험이 부족한 것이 핵심 문제.</p>
+    <div class="grid2">
+      <div class="card cc-teal">
+        <div class="card-title">✅ 현지에 있는 것</div>
+        <ul>
+          <li>AMEG Group 등 대형 테크니컬 프로덕션 기업 보유</li>
+          <li>L-Acoustics 음향·대형 LED·레이저 장비 보유</li>
+          <li>Light & Sound Kazakhstan 국제 박람회 매년 개최</li>
+          <li>일반 팝 콘서트·기업 행사 수준 인프라 충분</li>
+        </ul>
+      </div>
+      <div class="card cc-red">
+        <div class="card-title">⚠️ 부족한 것</div>
+        <ul>
+          <li>K-Pop 칼군무·복잡한 동선·리프트 연출 경험 전무</li>
+          <li>한국 기획사 Technical Rider 이해·소화 능력 부족</li>
+          <li>숙련된 콘솔 오퍼레이터 (음향·조명 감독) 부족</li>
+          <li>영어·한국어 소통 가능한 전문 스태프 부족</li>
+          <li>독과점으로 렌탈 비용 높음</li>
+        </ul>
+      </div>
+    </div>
+    <div class="hbox hbox-purple" style="margin-top:10px;">
+      <p>💡 <strong>뮤즈아이 기회:</strong> 현지 하드웨어(AMEG 등) + 한국 메인 오퍼레이터 조합으로 "K-Pop 전문 테크니컬 브릿지" 역할. 한국에서 무거운 장비 운반 없이 현지 장비 활용 → 물류비 절감 + 현지 업체와의 독점 파트너십 구축.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════
+     5. 비즈니스 환경
+══════════════════════════════════ -->
+<div class="section" id="sec-biz">
+<div class="content">
+  <div class="sec-header"><div class="sec-dot" style="background:#BA7517;"></div><h2>🏢 비즈니스 환경</h2><p>법인설립 · 세금 · IP · 라이선싱 · 지원기관</p></div>
+
+  <div class="card">
+    <div class="card-title">🏛️ 현지 법인 설립 (TOO — 한국의 유한회사)</div>
+    <div class="flow">
+      <div class="flow-box"><div class="flow-step">STEP 01</div><div class="flow-title">IIN 발급</div><div class="flow-desc">현지 민원센터 방문 · 여권 제출 · 3~5일</div></div>
+      <div class="flow-arrow">›</div>
+      <div class="flow-box"><div class="flow-step">STEP 02</div><div class="flow-title">C5 비자</div><div class="flow-desc">외국인 투자자 필수 · 입국 후 2개월 내 법인 설립</div></div>
+      <div class="flow-arrow">›</div>
+      <div class="flow-box"><div class="flow-step">STEP 03</div><div class="flow-title">TOO 등기</div><div class="flow-desc">법인명·정관·주소 등록 · BIN 발급 · 1~3일</div></div>
+      <div class="flow-arrow">›</div>
+      <div class="flow-box"><div class="flow-step">STEP 04</div><div class="flow-title">계좌 개설</div><div class="flow-desc">Kaspibank · Halyk Bank · 3~5일</div></div>
+      <div class="flow-arrow">›</div>
+      <div class="flow-box"><div class="flow-step">STEP 05</div><div class="flow-title">세무 등록</div><div class="flow-desc">과세 유형 선택 · 포스기·영수증 발행 가능</div></div>
+    </div>
+    <div class="hbox hbox-blue">
+      <p>⭐ <strong>추천 전략 (비용·시간 절감):</strong> 한국에 먼저 1인 법인 설립 → 그 한국 법인이 카자흐스탄 TOO 지분 100% 보유하는 <strong>자회사 구조</strong>로 진출. 개인 C5 비자 까다로운 심사 단계 생략 가능. 많은 한국 기업이 사용하는 실무 방식.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">💰 세금 체계 (2026년 기준)</div>
+    <table class="tbl">
+      <tr><th>항목</th><th>세율</th><th>비고</th></tr>
+      <tr><td><strong>부가가치세 (VAT)</strong></td><td><strong>16%</strong></td><td>2026년 12%에서 인상 — 마진 재계산 필수</td></tr>
+      <tr><td>개인소득세 (PIT)</td><td>10%</td><td>정액 세율 · 원천징수</td></tr>
+      <tr><td>기여금형 연금</td><td>10%</td><td>직원 부담</td></tr>
+      <tr><td>사회세</td><td>9.5%</td><td>고용주 부담</td></tr>
+      <tr><td>법인세</td><td>20%</td><td>소기업 간이과세 선택 가능</td></tr>
+      <tr><td>직원 의료보험</td><td>고용주 3% + 직원 2%</td><td>별도 납부</td></tr>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">™️ 상표권 (IP) 등록 가이드</div>
+    <div class="grid2">
+      <div>
+        <strong>등록 기관 & 절차</strong>
+        <ul style="margin-top:6px;">
+          <li><strong>Qazpatent</strong> (카자흐스탄 특허청)에 별도 등록 필수</li>
+          <li>한국 특허청 등록은 카자흐스탄에서 효력 없음 (속지주의)</li>
+          <li><strong>마드리드 국제출원</strong> 활용 시 한국에서 편리하게 신청 가능</li>
+          <li>출원~등록 약 19~26개월 소요 → 지금 바로 신청해야</li>
+          <li>10년 유효 · 갱신 가능</li>
+        </ul>
+      </div>
+      <div>
+        <strong>비용 (1개 상표, 1개 류 기준)</strong>
+        <ul style="margin-top:6px;">
+          <li>정부 관납료: 약 30~40만원</li>
+          <li>현지 대리인(변리사) 수수료: 약 50~90만원</li>
+          <li><strong>총 약 80~130만원</strong></li>
+          <li>류 추가 시 50~70%씩 증가</li>
+          <li><strong>KOTRA IP-DESK</strong> 통해 비용 50~70% 환급 가능</li>
+        </ul>
+      </div>
+    </div>
+    <div class="grid3" style="margin-top:10px;">
+      <div class="hbox hbox-pink"><p><strong>제41류:</strong> 댄스 아카데미·공연 기획·교육</p></div>
+      <div class="hbox hbox-purple"><p><strong>제35류:</strong> 굿즈숍·소매업 운영</p></div>
+      <div class="hbox hbox-teal"><p><strong>제28/16류:</strong> 인형·문구·굿즈 상품 자체</p></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">🏦 Kaspi Pay — 현지 결제 필수 인프라</div>
+    <p>카자흐스탄은 현금·카드보다 <strong>Kaspi Bank 앱</strong>이 국민 결제 수단. 길거리 노점부터 대형 몰까지 Kaspi QR 없으면 영업 불가. 법인 계좌 개설 즉시 <strong>Kaspi Pay 가맹점 등록</strong> 필수.</p>
+    <div class="hbox hbox-amber" style="margin-top:8px;">
+      <p>💡 Kaspi 앱 내 쇼핑몰(Kaspi Shop)에 굿즈 입점 시 <strong>할부 결제 연동</strong> → 청소년들이 부모 계정으로 쉽게 구매 → 굿즈 매출 급증 효과.</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">🤝 주요 지원 기관 활용 가이드</div>
+    <div class="grid2">
+      <div class="contact-card">
+        <div class="contact-icon" style="background:#E6F1FB;">🏢</div>
+        <div><div class="contact-name">KOTRA 알마티 무역관</div><div class="contact-role">한국 기업 현지 진출 지원 핵심 기관</div><div class="contact-info">시장조사 · 법인설립 · IP-DESK · 현지 파트너 매칭 · 법률 자문</div></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon" style="background:#FBEAF0;">🎭</div>
+        <div><div class="contact-name">주카자흐스탄 한국문화원</div><div class="contact-role">아스타나 소재 · K-Pop 아카데미·문화제 주관</div><div class="contact-info">팬덤 DB 보유 · 행사 공동 주최 · SNS 홍보 협조 가능</div></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon" style="background:#E1F5EE;">👨‍👩‍👧</div>
+        <div><div class="contact-name">알마티 한인회 · 고려인협회</div><div class="contact-role">현지 정착·로컬 인프라 확보의 핵심</div><div class="contact-info">신뢰 파트너 소개 · 상가 임대 정보 · 생생한 현지 정보</div></div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-icon" style="background:#FAEEDA;">🏗️</div>
+        <div><div class="contact-name">카스피안 그룹 (K-파크 주도)</div><div class="contact-role">고려인 대기업 · K-파크 개발사</div><div class="contact-info">KOTRA 통해 미팅 주선 요청 · 2027년 입점 사전 협의 대상</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════
+     6. 출장 & 여행
+══════════════════════════════════ -->
+<div class="section" id="sec-travel">
+<div class="content">
+  <div class="sec-header"><div class="sec-dot" style="background:#185FA5;"></div><h2>✈️ 출장 & 여행 정보</h2><p>항공 · 숙박 · 비자 · 교통</p></div>
+
+  <div class="grid4" style="margin-bottom:12px;">
+    <div class="statcard"><div class="num">7<span class="unit">시간</span></div><div class="lbl">인천→알마티 직항</div><div class="sub">6시간 40분~7시간 15분</div></div>
+    <div class="statcard"><div class="num">-4<span class="unit">시간</span></div><div class="lbl">한국과 시차</div><div class="sub">한국 오후 2시 = 현지 오전 10시</div></div>
+    <div class="statcard"><div class="num">60<span class="unit">~130</span></div><div class="lbl">왕복 항공권 (만원)</div><div class="sub">비수기 60~80 · 성수기 90~130</div></div>
+    <div class="statcard"><div class="num">30<span class="unit">일</span></div><div class="lbl">비자 면제 체류</div><div class="sub">한국 여권 무비자 입국</div></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">✈️ 항공 정보</div>
+      <ul>
+        <li><strong>직항 운항사:</strong> 아시아나항공 · 에어아스타나(카자흐 국적기) · 이스타항공</li>
+        <li><strong>비수기(가을~겨울):</strong> 왕복 60~80만원, 특가 50만원대 가능</li>
+        <li><strong>성수기(봄~여름·연말):</strong> 왕복 90~130만원</li>
+        <li>사업 목적지인 알마티 공항(ALA) 기준</li>
+        <li>출장 시 인천 출발 기준 당일 오전 비행 권장 (현지 오전 도착 불가 → 오후 미팅 가능)</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-title">🏨 호텔 숙박 가이드 (알마티)</div>
+      <table class="tbl">
+        <tr><th>등급</th><th>1박</th><th>추천</th></tr>
+        <tr><td>5성급</td><td>25~40만원+</td><td>리츠칼튼 · 인터컨티넨탈 · VIP 미팅용</td></tr>
+        <tr><td><strong>4성급 ⭐</strong></td><td><strong>10~20만원</strong></td><td>노보텔 · 홀리데이인 · 출장 기본</td></tr>
+        <tr><td>3성급</td><td>5~9만원</td><td>장기 체류·시장조사 시 비용 절감</td></tr>
+      </table>
+      <p style="font-size:12px;color:#888;margin-top:6px;">💡 알마티 중심가 아르바트 거리 또는 Dostyk Plaza 인근 숙소가 동선 효율 최고</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">🗺️ 알마티 주요 상권 지도</div>
+    <table class="tbl">
+      <tr><th>지역</th><th>특징</th><th>사업 적합도</th></tr>
+      <tr><td>알말리 구역 (Almaly)</td><td>알마티 중심가 · 교통 편리 · 유동인구 최고</td><td>⭐ 댄스학원·굿즈숍 1순위</td></tr>
+      <tr><td>Dostyk Plaza 인근</td><td>프리미엄 쇼핑 · 부유층 밀집</td><td>⭐ 고급 팬 이벤트·팝업</td></tr>
+      <tr><td>KazNU 대학가</td><td>젊은 층 밀집 · 접근성 최고 · 임대료 저렴</td><td>⭐ 아카데미 초기 거점</td></tr>
+      <tr><td>Mega Center / ESENTAI</td><td>대형 쇼핑몰 · 자체 인프라 완비</td><td>⭐ 굿즈숍 팝업·숍인숍</td></tr>
+      <tr><td>아르바트 거리 (Arbat)</td><td>문화·예술 거리 · 젊은 층 핫플</td><td>공연·팝업 이벤트</td></tr>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">🚗 현지 교통 & 이동</div>
+    <ul>
+      <li><strong>택시:</strong> Yandex Go (카카오택시 같은 앱) 필수 설치 — 미터기 없는 택시보다 저렴·안전</li>
+      <li><strong>렌터카:</strong> 국제운전면허증 필요 · 현지 도로 상태 파악 후 이용 권장</li>
+      <li><strong>지하철:</strong> 알마티 1개 노선 · 환승 제한적 — 시내 이동은 택시 위주</li>
+      <li><strong>도시 간 이동:</strong> 알마티-아스타나 항공 2시간 (차로는 약 14~16시간)</li>
+      <li><strong>출장 팁:</strong> Yandex Go로 도착 즉시 공항 픽업 예약 → 바가지 요금 없음</li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════
+     7. 현지 생활 TIP
+══════════════════════════════════ -->
+<div class="section" id="sec-living">
+<div class="content">
+  <div class="sec-header"><div class="sec-dot" style="background:#534AB7;"></div><h2>🛡️ 현지 생활 & 안전 TIP</h2><p>안전 · 의료 · 통신 · 관공서 · 긴급연락처</p></div>
+
+  <div class="acc-item open">
+    <div class="acc-head" onclick="toggleAcc(this)">🛡️ 안전 & 치안 <span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <ul class="tip-list">
+        <li><span class="tip-icon">✅</span><span>알마티·아스타나 중심가는 치안 비교적 양호. 일반 관광객 수준의 주의면 충분.</span></li>
+        <li><span class="tip-icon">⚠️</span><span>야간 구시가지 이면도로·혼잡 시장은 소매치기 주의. 귀중품 분산 휴대.</span></li>
+        <li><span class="tip-icon">⚠️</span><span>신뢰할 수 없는 현지인 비즈니스 파트너 제안 주의. 계약서 공증 없이 선금 절대 금지.</span></li>
+        <li><span class="tip-icon">✅</span><span>공식 등록 택시(Yandex Go) 이용 — 미등록 택시 탑승 지양.</span></li>
+        <li><span class="tip-icon">⚠️</span><span>지정학적 리스크: 러시아 국경 접경국. 국제 정세 변화 시 금융 거래·물류에 영향 가능. KOTRA 통해 주기적 체크.</span></li>
+        <li><span class="tip-icon">✅</span><span>한국 외교부 해외안전여행 앱(영사콜센터) 설치 필수.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <div class="acc-head" onclick="toggleAcc(this)">🏥 의료 & 보건 <span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <ul class="tip-list">
+        <li><span class="tip-icon">💊</span><span>한국 상비약(지사제·진통제·감기약 등) 넉넉히 지참. 현지 약국 약품 성분 다를 수 있음.</span></li>
+        <li><span class="tip-icon">🏥</span><span>외국인 의료 시설: <strong>SOS International Clinic (알마티)</strong>, <strong>Interteach Medical Center</strong> 등 영어 가능 사설 클리닉 이용 권장.</span></li>
+        <li><span class="tip-icon">💉</span><span>여행자 보험 필수 — 현지 의료비 실비 청구 가능한 상품 가입.</span></li>
+        <li><span class="tip-icon">🌊</span><span>수돗물 음용 금지. 생수 구매 또는 정수 필터 사용. 석회질 성분 다량 함유.</span></li>
+        <li><span class="tip-icon">☀️</span><span>고산 건조 기후 — 자외선 매우 강함. 썬크림 필수. 고도 적응기 첫날 무리한 일정 자제.</span></li>
+        <li><span class="tip-icon">❄️</span><span>겨울 극한 대비 — 아스타나 방문 시 -30°C 이하 가능. 방한용품 철저 준비.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <div class="acc-head" onclick="toggleAcc(this)">📱 통신 & 인터넷 <span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <ul class="tip-list">
+        <li><span class="tip-icon">📶</span><span>현지 통신 3사: <strong>Kcell · Beeline KZ · Tele2 KZ</strong>. 공항 도착 즉시 SIM 구매 권장 (약 5,000~10,000텡게).</span></li>
+        <li><span class="tip-icon">🌐</span><span>4G LTE 커버리지 알마티·아스타나 우수. 외곽 지역 약화.</span></li>
+        <li><span class="tip-icon">⚡</span><span>호텔 Wi-Fi 무료 제공 일반적이나 속도 편차 큼. 중요 화상 미팅 전 체크 필수.</span></li>
+        <li><span class="tip-icon">🔒</span><span>VPN 사용 권장 — 일부 글로벌 서비스 접속 제한 가능성.</span></li>
+        <li><span class="tip-icon">💬</span><span>WhatsApp이 국민 메신저. 현지 거래처·파트너와 WhatsApp으로 소통 기본.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <div class="acc-head" onclick="toggleAcc(this)">🏛️ 관공서 & 행정 TIP <span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <ul class="tip-list">
+        <li><span class="tip-icon">📋</span><span>모든 공식 서류는 <strong>카자흐어 또는 러시아어</strong>로 작성. 한국어·영어 계약서는 반드시 러시아어 공증 번역본 동반.</span></li>
+        <li><span class="tip-icon">🏢</span><span>민원센터(PSC, Public Service Center): 법인 등록·IIN 발급·각종 허가 신청. 현지인 도우미 또는 대리인 동행 강력 권장.</span></li>
+        <li><span class="tip-icon">🔏</span><span>전자정부 포털 <strong>egov.kz</strong> 활용 시 공인인증서(EDS) 필요 — IIN 발급과 함께 신청.</span></li>
+        <li><span class="tip-icon">⏳</span><span>관공서 처리 속도 한국보다 느림. 중요 서류는 여유 있게 일정 잡을 것.</span></li>
+        <li><span class="tip-icon">🤝</span><span>알마티 한인회 또는 KOTRA를 통해 신뢰할 수 있는 현지 행정 대리인(법무사·회계사) 소개받는 것이 가장 안전.</span></li>
+        <li><span class="tip-icon">📅</span><span>나우리즈(3.21~23), 카자흐 독립기념일(12.16) 등 국경일 전후 공공기관 연속 휴무 주의.</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <div class="acc-head" onclick="toggleAcc(this)">💡 비즈니스 에티켓 & 문화 <span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <ul class="tip-list">
+        <li><span class="tip-icon">🤝</span><span>첫 미팅은 신뢰 구축이 우선. 비즈니스 제안 전 개인적 관계 형성에 시간 투자.</span></li>
+        <li><span class="tip-icon">☕</span><span>차(카자흐식 블랙티 또는 녹차)를 권하면 거절하지 않는 것이 예의. 식사 자리 거절도 실례.</span></li>
+        <li><span class="tip-icon">🌙</span><span>이슬람 문화권: 라마단 기간 식사 일정 배려. 돼지고기 관련 메뉴 제공 시 사전 확인.</span></li>
+        <li><span class="tip-icon">💼</span><span>"인맥(관시)"이 비즈니스의 절반. 고려인 네트워크·KOTRA·한인회를 통한 소개가 콜드 콜보다 10배 효과적.</span></li>
+        <li><span class="tip-icon">📜</span><span>계약서는 반드시 서면으로. 구두 약속은 법적 효력 없음. 모든 조건은 문서화.</span></li>
+        <li><span class="tip-icon">🎁</span><span>첫 미팅 시 한국 소기업 제품·과자 등 작은 선물 효과적 (한국 관심 높음).</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="acc-item">
+    <div class="acc-head" onclick="toggleAcc(this)">📞 긴급 & 유용 연락처 <span class="acc-arrow">▼</span></div>
+    <div class="acc-body">
+      <table class="tbl">
+        <tr><th>기관</th><th>연락처</th><th>비고</th></tr>
+        <tr><td>카자흐스탄 경찰 (긴급)</td><td>102</td><td>범죄·사고</td></tr>
+        <tr><td>구급차</td><td>103</td><td>의료 응급</td></tr>
+        <tr><td>소방</td><td>101</td><td>화재</td></tr>
+        <tr><td><strong>주알마티 한국 총영사관</strong></td><td>+7-727-247-5080</td><td>영사 서비스·긴급 지원</td></tr>
+        <tr><td>한국 외교부 영사콜센터</td><td>+82-2-3210-0404</td><td>24시간 한국어 상담</td></tr>
+        <tr><td>KOTRA 알마티 무역관</td><td>kotra.or.kr 검색</td><td>비즈니스 지원</td></tr>
+        <tr><td>알마티 한인회</td><td>현지 한인 커뮤니티 통해 확인</td><td>동포 네트워크</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════
+     8. 협력 네트워크
+══════════════════════════════════ -->
+<div class="section" id="sec-network">
+<div class="content">
+  <div class="sec-header"><div class="sec-dot" style="background:#1D9E75;"></div><h2>🤝 협력 네트워크</h2><p>교류단체 · 현지 협업 업체 · 파트너십</p></div>
+
+  <div class="card">
+    <div class="card-title">🏛️ 정부·공공 기관 (가장 확실한 파트너)</div>
+    <div class="grid2">
+      <div class="contact-card"><div class="contact-icon" style="background:#E6F1FB;">🏢</div><div><div class="contact-name">KOTRA 알마티 무역관</div><div class="contact-role">한국 기업 진출 최전선 기지</div><div class="contact-info">시장조사 · 법인설립 안내 · IP-DESK(상표권 비용 50~70% 환급) · 신뢰 파트너 매칭</div></div></div>
+      <div class="contact-card"><div class="contact-icon" style="background:#FBEAF0;">🎭</div><div><div class="contact-name">주카자흐스탄 한국문화원</div><div class="contact-role">아스타나 소재 · 한류 최전선</div><div class="contact-info">K-Pop 커버댄스 대회 주관 · 팬덤 네트워크 보유 · 공동 행사 협력</div></div></div>
+      <div class="contact-card"><div class="contact-icon" style="background:#E1F5EE;">🏛️</div><div><div class="contact-name">주알마티 대한민국 총영사관</div><div class="contact-role">알마티 관할 외교 공관</div><div class="contact-info">비자·공증·행정 처리 · 대형 행사 시 치안 협조 · 한-카 교류 채널</div></div></div>
+      <div class="contact-card"><div class="contact-icon" style="background:#FAEEDA;">📊</div><div><div class="contact-name">한국콘텐츠진흥원 (KOCCA)</div><div class="contact-role">K-콘텐츠 해외 진출 지원</div><div class="contact-info">해외 시장조사 보고서 제공 · K-Pop/드라마 IP 활용 지원 · 중소 기획사 매칭</div></div></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">👨‍👩‍👧 민간 & 교민 네트워크</div>
+    <div class="grid2">
+      <div class="contact-card"><div class="contact-icon" style="background:#EEEDFE;">🌿</div><div><div class="contact-name">알마티 한인회</div><div class="contact-role">교민·기업인 구심점</div><div class="contact-info">한인신문 운영 · 설날·추석 문화제 주관 · 현지 구인·구직 · 상가 임대 정보</div></div></div>
+      <div class="contact-card"><div class="contact-icon" style="background:#E1F5EE;">🌾</div><div><div class="contact-name">카자흐스탄 고려인협회 & 고려일보</div><div class="contact-role">10만 고려인 공식 단체</div><div class="contact-info">대기업 총수·유력 기업인 네트워크 · 2027년 이주 90주년 행사 주관 · 브랜드 론칭 연계 가능</div></div></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">🏗️ 현지 협업 가능 주요 업체</div>
+    <table class="tbl">
+      <tr><th>업체/그룹</th><th>분야</th><th>협업 포인트</th></tr>
+      <tr><td><strong>카스피안 그룹</strong> (최유리 회장)</td><td>K-파크 개발 · 대기업</td><td>K-파크 입점 협의 · 고려인 최상위 네트워크</td></tr>
+      <tr><td><strong>신라인 그룹</strong></td><td>CU 편의점 현지 파트너 · 유통</td><td>CU 매장 내 굿즈 매대 숍인숍 · 유통 채널</td></tr>
+      <tr><td><strong>AMEG Group</strong></td><td>음향·조명·무대 장비</td><td>공연 장비 렌탈 파트너 · 기술 브릿지 역할</td></tr>
+      <tr><td><strong>현지 탑티어 커버댄스 크루</strong></td><td>K-Pop 댄스 · 팬덤</td><td>댄스 아카데미 스타 강사 스카우트 · 팬덤 흡수</td></tr>
+      <tr><td><strong>Kaspi Bank</strong></td><td>핀테크 · 국민 결제</td><td>Kaspi Shop 입점 · Kaspi Pay 가맹</td></tr>
+      <tr><td><strong>현지 한국계 K-뷰티 대리점</strong></td><td>화장품 유통</td><td>굿즈숍 숍인숍 · 브랜드 스폰서십</td></tr>
+    </table>
+  </div>
+
+  <div class="card" style="margin-top:12px;">
+    <div class="card-title">📅 협력 접근 추천 순서</div>
+    <div class="flow">
+      <div class="flow-box"><div class="flow-step">1단계</div><div class="flow-title">KOTRA 연락</div><div class="flow-desc">알마티 무역관에 사업 개요 제출 · 시장조사·법인설립 가이드 요청</div></div>
+      <div class="flow-arrow">›</div>
+      <div class="flow-box"><div class="flow-step">2단계</div><div class="flow-title">출장 시장조사</div><div class="flow-desc">알마티 KOTRA·한인회 방문 · 현지 댄스 크루 미팅 · 상권 조사</div></div>
+      <div class="flow-arrow">›</div>
+      <div class="flow-box"><div class="flow-step">3단계</div><div class="flow-title">K-파크 미팅</div><div class="flow-desc">KOTRA 통해 카스피안 그룹 연결 · 2027년 입점 사전 협의</div></div>
+      <div class="flow-arrow">›</div>
+      <div class="flow-box"><div class="flow-step">4단계</div><div class="flow-title">문화원 파트너십</div><div class="flow-desc">K-Pop 축제 공동 주최 · 팬덤 접점 확보 · 공신력 구축</div></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════
+     9. 자료실
+══════════════════════════════════ -->
+<div class="section" id="sec-docs">
+<div class="content">
+  <div class="sec-header"><div class="sec-dot" style="background:#888;"></div><h2>📂 자료실</h2><p>참고 문서 · 링크 모음</p></div>
+
+  <div class="hbox hbox-blue">
+    <p>📌 <strong>사용법:</strong> Google Drive · OneDrive 등에 파일을 올린 후 공유 링크를 아래 항목에 연결해 사용합니다. 파일 링크 추가는 담당자에게 요청하거나 직접 URL을 알려주세요.</p>
+  </div>
+
+  <div class="doc-category" style="margin-top:1.25rem;">
+    <div class="doc-category-title">📊 시장 조사 & 전략</div>
+    <div class="doc-list">
+      <div class="doc-item" onclick="openDoc('https://drive.google.com')">
+        <div class="doc-icon" style="background:#E6F1FB;">📊</div>
+        <div><div class="doc-name">카자흐스탄 시장 분석 보고서 (본 문서 원본)</div><div class="doc-meta">카자흐스탄.docx · MUSE I 내부자료</div></div>
+        <span class="doc-link">링크 등록 필요 →</span>
+      </div>
+      <div class="doc-item" onclick="openDoc('https://drive.google.com')">
+        <div class="doc-icon" style="background:#FBEAF0;">🎤</div>
+        <div><div class="doc-name">KTES 카자흐스탄 비즈니스 모델</div><div class="doc-meta">KTES_카자흐스탄v.docx · GBK × 뮤즈아이</div></div>
+        <span class="doc-link">링크 등록 필요 →</span>
+      </div>
+      <div class="doc-item" onclick="openDoc('https://drive.google.com')">
+        <div class="doc-icon" style="background:#E1F5EE;">📈</div>
+        <div><div class="doc-name">KOTRA 카자흐스탄 진출 가이드</div><div class="doc-meta">kotra.or.kr 공개 자료</div></div>
+        <span class="doc-link">링크 등록 필요 →</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-category">
+    <div class="doc-category-title">🏢 법인 & 법률</div>
+    <div class="doc-list">
+      <div class="doc-item">
+        <div class="doc-icon" style="background:#FAEEDA;">⚖️</div>
+        <div><div class="doc-name">카자흐스탄 TOO 법인 설립 체크리스트</div><div class="doc-meta">업로드 예정</div></div>
+        <span class="doc-link" style="color:#aaa;">준비 중</span>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icon" style="background:#EEEDFE;">™️</div>
+        <div><div class="doc-name">Qazpatent 상표 출원 가이드</div><div class="doc-meta">업로드 예정</div></div>
+        <span class="doc-link" style="color:#aaa;">준비 중</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-category">
+    <div class="doc-category-title">🎤 공연 & 아티스트</div>
+    <div class="doc-list">
+      <div class="doc-item">
+        <div class="doc-icon" style="background:#FBEAF0;">🎵</div>
+        <div><div class="doc-name">알마티 공연장 대관 가이드 & 연락처</div><div class="doc-meta">업로드 예정</div></div>
+        <span class="doc-link" style="color:#aaa;">준비 중</span>
+      </div>
+      <div class="doc-item">
+        <div class="doc-icon" style="background:#E1F5EE;">🔊</div>
+        <div><div class="doc-name">AMEG Group 장비 리스트 & 견적</div><div class="doc-meta">업로드 예정</div></div>
+        <span class="doc-link" style="color:#aaa;">준비 중</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="doc-category">
+    <div class="doc-category-title">🌐 유용한 외부 링크</div>
+    <div class="doc-list">
+      <div class="doc-item" onclick="openDoc('https://www.kotra.or.kr')">
+        <div class="doc-icon" style="background:#E6F1FB;">🏢</div>
+        <div><div class="doc-name">KOTRA 알마티 무역관</div><div class="doc-meta">kotra.or.kr</div></div>
+        <span class="doc-link">바로가기 →</span>
+      </div>
+      <div class="doc-item" onclick="openDoc('https://www.krisha.kz')">
+        <div class="doc-icon" style="background:#E1F5EE;">🏠</div>
+        <div><div class="doc-name">Krisha.kz — 현지 부동산 플랫폼</div><div class="doc-meta">상가 임대료 실시간 시세 확인</div></div>
+        <span class="doc-link">바로가기 →</span>
+      </div>
+      <div class="doc-item" onclick="openDoc('https://egov.kz')">
+        <div class="doc-icon" style="background:#FAEEDA;">🏛️</div>
+        <div><div class="doc-name">egov.kz — 카자흐스탄 전자정부</div><div class="doc-meta">법인 등록 · 각종 행정 서비스</div></div>
+        <span class="doc-link">바로가기 →</span>
+      </div>
+      <div class="doc-item" onclick="openDoc('https://musem.xyz')">
+        <div class="doc-icon" style="background:#FBEAF0;">🎭</div>
+        <div><div class="doc-name">MUSEM · Global IP Company</div><div class="doc-meta">musem.xyz · 이효진 소속</div></div>
+        <span class="doc-link">바로가기 →</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="upload-note">
+    📎 <strong>파일 추가 방법:</strong> Google Drive에 파일을 올리고 "링크가 있는 모든 사용자" 공유 설정 후, 링크를 설동욱 CSO에게 전달하면 자료실에 등록됩니다.
+  </div>
+</div>
+</div>
+
+<!-- ══════════════════════════════════
+     APPENDIX — KTES 전략
+══════════════════════════════════ -->
+<div class="appendix">
+  <div class="appendix-header">
+    <div style="max-width:900px;margin:0 auto;">
+      <div class="appendix-title">APPENDIX · 첨부 자료</div>
+      <div class="appendix-h">KTES 카자흐스탄 전략 — 뮤즈아이 × GBK</div>
+      <div class="appendix-sub">K-Pop Talent Economy System · 카자흐스탄 모델 전문 · 내부 기밀</div>
+    </div>
+  </div>
+  <div class="appendix-content">
+
+    <div class="acard">
+      <div class="step">OVERVIEW</div>
+      <h3>협업 구조</h3>
+      <p>현지 파트너 <strong>뮤즈아이</strong>가 MCN 방송국 운영과 현지 오퍼레이션을 담당하고, <strong>GBK Nexus AI 플랫폼</strong>이 트레이닝·데뷔·MCN 전환 시스템을 제공. CIS 러시아어권 시장은 GBK 단독으로 절대 진입 불가 — 뮤즈아이 없이는 없는 시장.</p>
+    </div>
+
+    <div class="acard">
+      <div class="step">PIPELINE</div>
+      <h3>5단계 파이프라인 (아이나 스토리)</h3>
+      <div class="a-flow">
+        <div class="a-flow-box"><div class="s">STEP 1</div><div class="t">발굴</div><div class="d">SNS 공고 → Girls Universe 앱 지원 → 접수비 $20 · GBK AI 영상 분석</div></div>
+        <div class="a-flow-box"><div class="s">STEP 2</div><div class="t">교육</div><div class="d">12주 현지 아카데미 $400 · 알마티 거주 유지 가능</div></div>
+        <div class="a-flow-box"><div class="s">STEP 3</div><div class="t">방한</div><div class="d">비자·항공·숙박·통역 올인원 패키지 $1,200~2,200</div></div>
+        <div class="a-flow-box"><div class="s">STEP 4</div><div class="t">MCN 전환</div><div class="d">탈락 후 GBK Nexus 브랜드 매칭 → SNS 크리에이터 수익화</div></div>
+        <div class="a-flow-box"><div class="s">STEP 5</div><div class="t">방송국</div><div class="d">MUSE-I CIS 유튜브 채널 고정 크리에이터 활동</div></div>
+      </div>
+    </div>
+
+    <div class="acard">
+      <div class="step">REVENUE</div>
+      <h3>수익 구조 완성판</h3>
+      <div class="a-rev">
+        <div class="a-rev-row"><span class="a-rev-src">오디션 접수비</span><span class="a-rev-amt">$20/인</span><div style="display:flex;gap:4px;margin-left:auto;"><span class="badge b-pink">뮤즈아이 100%</span></div></div>
+        <div class="a-rev-row"><span class="a-rev-src">아카데미 수강료</span><span class="a-rev-amt">$400/인</span><div style="display:flex;gap:4px;margin-left:auto;"><span class="badge b-pink">뮤즈아이 $280</span><span class="badge b-teal">GBK $120</span></div></div>
+        <div class="a-rev-row"><span class="a-rev-src">방한 패키지</span><span class="a-rev-amt">$1,200~2,200/인</span><div style="display:flex;gap:4px;margin-left:auto;"><span class="badge b-pink">뮤즈아이 100%</span></div></div>
+        <div class="a-rev-row"><span class="a-rev-src">MCN 브랜드 계약</span><span class="a-rev-amt">$300~/건</span><div style="display:flex;gap:4px;margin-left:auto;"><span class="badge b-gray">크리에이터 70%</span><span class="badge b-teal">GBK 20%</span><span class="badge b-pink">뮤즈아이 10%</span></div></div>
+        <div class="a-rev-row"><span class="a-rev-src">유튜브 방송국 광고 수익</span><span class="a-rev-amt">$1,000~3,000/월</span><div style="display:flex;gap:4px;margin-left:auto;"><span class="badge b-pink">뮤즈아이 100%</span></div></div>
+        <div class="a-rev-row"><span class="a-rev-src">브랜드 스폰서십</span><span class="a-rev-amt">$200~1,000/영상</span><div style="display:flex;gap:4px;margin-left:auto;"><span class="badge b-pink">뮤즈아이 100%</span></div></div>
+        <div class="a-rev-row"><span class="a-rev-src">GBK 콘텐츠 독점 배포 수수료</span><span class="a-rev-amt">$500~2,000/월</span><div style="display:flex;gap:4px;margin-left:auto;"><span class="badge b-pink">뮤즈아이 100%</span></div></div>
+        <div class="a-rev-row"><span class="a-rev-src">크리에이터 개인채널 수익 배분</span><span class="a-rev-amt">$500/월 × 20%</span><div style="display:flex;gap:4px;margin-left:auto;"><span class="badge b-pink">뮤즈아이 20%</span><span class="badge b-gray">크리에이터 80%</span></div></div>
+      </div>
+    </div>
+
+    <div class="acard">
+      <div class="step">NEXT STEPS</div>
+      <h3>뮤즈아이 즉시 실행 과제</h3>
+      <div class="next-steps">
+        <div class="ns-card"><div class="ns-num">STEP 01</div><h4>한국 법인 설립</h4><p>뮤즈아이 한국 법인 → 카자흐스탄 TOO 자회사 구조. C5 비자 절차 간소화.</p></div>
+        <div class="ns-card"><div class="ns-num">STEP 02</div><h4>상표권 선출원</h4><p>KOTRA IP-DESK 통해 Qazpatent 출원. 비용 50~70% 환급. 지금 즉시 시작 필요.</p></div>
+        <div class="ns-card"><div class="ns-num">STEP 03</div><h4>공연 아티스트 확정</h4><p>박성진 대표 인프라로 찬열 포함 EXO 계열 아티스트 알마티 공연 일정 협의. 할릭 아레나 또는 공화국 궁전 우선 검토.</p></div>
+        <div class="ns-card"><div class="ns-num">STEP 04</div><h4>KOTRA 알마티 연결</h4><p>시장조사·법인설립 자문 의뢰. 카스피안 그룹(K-파크) 미팅 주선 요청.</p></div>
+        <div class="ns-card"><div class="ns-num">STEP 05</div><h4>GBK × 뮤즈아이 MOU</h4><p>KTES 카자흐스탄 모델 정식 협업 계약. AI 플랫폼 적용 범위 및 수익 분배 구조 확정.</p></div>
+        <div class="ns-card"><div class="ns-num">STEP 06</div><h4>러시아어 IR 자료 제작</h4><p>현지 파트너·투자자 대상 러시아어 버전 뮤즈아이 소개서 + KTES 모델 시각화 제작.</p></div>
+      </div>
+    </div>
+
+  </div>
+  <footer>
+    <p>MUSE I · 뮤즈아이 — 2026 · 내부 기밀 자료 · 무단 배포 금지</p>
+    <p style="margin-top:4px;">Kazakhstan × K-Culture Business Intelligence Hub</p>
+  </footer>
+</div>
+
+<script>
+function showSection(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.gnb-item').forEach(g=>g.classList.remove('active'));
+  var sec=document.getElementById('sec-'+id);
+  if(sec) sec.classList.add('active');
+  var items=document.querySelectorAll('.gnb-item');
+  var map={hero:0,overview:1,economy:2,hallyu:3,performance:4,biz:5,travel:6,living:7,network:8,docs:9};
+  if(map[id]!==undefined) items[map[id]].classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function toggleAcc(head){
+  var item=head.parentElement;
+  item.classList.toggle('open');
+}
+function openDoc(url){
+  if(url&&url!='#') window.open(url,'_blank');
+}
+</script>
+</body>
+</html>
